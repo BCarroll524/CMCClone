@@ -1,8 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { CoinService } from '../coin.service';
-import { DataSource } from '@angular/cdk/collections';
+import { RanksComponent } from '../ranks/ranks.component';
+import { TrendsComponent } from '../trends/trends.component';
 
 
 
@@ -13,40 +12,11 @@ import { DataSource } from '@angular/cdk/collections';
 })
 
 export class CoinsComponent implements OnInit {
-  topCoins = [];
-  trendingCoins = [];
-  displayedColumns = [
-    'rank',
-    'name',
-    'marketCap',
-    'price',
-    'volume',
-    'supply',
-    'change'
-  ];
 
-  constructor(
-    private coinService: CoinService,
-    private http: HttpClient
-  ) { }
+
+  constructor() { }
 
   ngOnInit() {
-    this.getTopCoins();
-    this.getTrendingCoins();
-  }
-
-  getTopCoins(): void {
-    this.coinService.getTopCoins()
-      .subscribe(data => {
-        this.topCoins = data['data'];
-      });
-  }
-
-  getTrendingCoins(): void {
-    this.coinService.getTrendingCoins()
-      .subscribe(data => {
-        this.trendingCoins = data['data'];
-      });
   }
 
 }

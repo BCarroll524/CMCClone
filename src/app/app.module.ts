@@ -1,31 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { CoinsComponent } from './coins/coins.component';
+import { RanksComponent } from './ranks/ranks.component';
+import { TrendsComponent } from './trends/trends.component';
 
 // material
-import { MatButtonModule, MatCheckboxModule} from '@angular/material';
-import { MatListModule } from '@angular/material/list';
-import { MatTabsModule } from '@angular/material/tabs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table';
+import { MaterialModule } from './material';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoinsComponent
+    CoinsComponent,
+    RanksComponent,
+    TrendsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatListModule,
-    MatTabsModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

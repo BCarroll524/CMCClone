@@ -1,0 +1,8 @@
+table {
+    width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+    flex: 0 0 200px;
+}
