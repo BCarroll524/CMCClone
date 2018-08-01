@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { CoinService } from '../coin.service';
 import { DataSource } from '@angular/cdk/collections';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 // icons
 
@@ -26,7 +28,9 @@ export class RanksComponent implements OnInit {
 
   constructor(
     private coinService: CoinService,
-    private http: HttpClient
+    private http: HttpClient,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -37,15 +41,17 @@ export class RanksComponent implements OnInit {
     this.coinService.getTopCoins()
       .subscribe(data => {
         this.topCoins = data['data'];
+        this.setIcon(this.topCoins);
+        console.log(this.topCoins);
       });
   }
 
   getColor(number: string): any {
     const actualNum = +number;
     if (actualNum < 0) {
-      return 'red';
+      return false;
     }
-    return 'green';
+    return true;
   }
 
   truncateNumber(number: number): any {
@@ -58,7 +64,7 @@ export class RanksComponent implements OnInit {
   addCommasToNum(number: string): any {
     let num = this.truncateNumber(+number);
     if (num > 999) {
-      console.log('in add commas if statement');
+      // console.log('in add commas if statement');
       num = num.toString();
       const index = num.indexOf('.');
       const array = num.split();
@@ -69,7 +75,7 @@ export class RanksComponent implements OnInit {
       }
       for (let j = 0; j < array.length; j++) {
         if ( j === commas[length - 1] ) {
-          console.log('trying to add commas');
+          // console.log('trying to add commas');
           newNum.push(',');
           commas.pop();
         }
@@ -78,6 +84,18 @@ export class RanksComponent implements OnInit {
       return newNum.join();
     }
     return num.toString();
+  }
+
+  // get icon of coin and add is as a property
+  setIcon(coins: Array<any>): any {
+    coins.filter(function(coin) {
+      const symbol = coin.symbol.toLowerCase();
+      coin.icon = `../../../node_modules/cryptocurrency-icons/svg/color/${symbol}.svg`;
+      this.matIconRegistry.addSvgIcon(
+        `${coin.symbol}`,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(`${coin.icon}`)
+      );
+    });
   }
 
 

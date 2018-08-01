@@ -1,8 +1,15 @@
 table {
-    width: 100%;
+    width: 60%;
+    margin: 0 auto;
 }
 
 .mat-cell,
 .mat-header-cell {
-    flex: 0 0 200px;
+    flex: 0 0 15%;
+    border-bottom: none;
 }
+
+.mat-header-row {
+    font-size: 24pt;
+}
+
