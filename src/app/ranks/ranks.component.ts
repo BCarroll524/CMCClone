@@ -15,7 +15,7 @@ export class RanksComponent implements OnInit {
   topCoins = [];
   displayedColumns = [
     'rank',
-    "icon",
+    'icon',
     'name',
     'marketCap',
     'price',
