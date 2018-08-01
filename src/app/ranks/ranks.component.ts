@@ -41,8 +41,7 @@ export class RanksComponent implements OnInit {
     this.coinService.getTopCoins()
       .subscribe(data => {
         this.topCoins = data['data'];
-        this.setIcon(this.topCoins);
-        console.log(this.topCoins);
+        // this.setIcon(this.topCoins);
       });
   }
 
@@ -64,7 +63,7 @@ export class RanksComponent implements OnInit {
   addCommasToNum(number: string): any {
     let num = this.truncateNumber(+number);
     if (num > 999) {
-      // console.log('in add commas if statement');
+      console.log('in add commas if statement');
       num = num.toString();
       const index = num.indexOf('.');
       const array = num.split();
@@ -74,11 +73,13 @@ export class RanksComponent implements OnInit {
         commas.push(i);
       }
       for (let j = 0; j < array.length; j++) {
-        if ( j === commas[length - 1] ) {
-          // console.log('trying to add commas');
+        console.log(j + ' compared to ' + commas[commas.length - 1]);
+        if ( j === commas[commas.length - 1] ) {
+          console.log('trying to add commas');
           newNum.push(',');
           commas.pop();
         }
+        console.log('value of j: ' + j);
         newNum.push(array[j]);
       }
       return newNum.join();
@@ -91,10 +92,10 @@ export class RanksComponent implements OnInit {
     coins.filter(function(coin) {
       const symbol = coin.symbol.toLowerCase();
       coin.icon = `../../../node_modules/cryptocurrency-icons/svg/color/${symbol}.svg`;
-      this.matIconRegistry.addSvgIcon(
-        `${coin.symbol}`,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(`${coin.icon}`)
-      );
+      // this.matIconRegistry.addSvgIcon(
+      //   `${coin.symbol}`,
+      //   this.domSanitizer.bypassSecurityTrustResourceUrl(`${coin.icon}`)
+      // );
     });
   }
 
