@@ -1,41 +1,48 @@
 <div>
   <table mat-table [dataSource]="topCoins" class="mat-elevation-z8">
       <ng-container matColumnDef="rank">
-          <th mat-header-cell *matHeaderCellDef> Rank </th>
-          <td mat-cell *matCellDef="let coin"> {{coin.rank}} </td>
+          <th mat-header-cell fxFlex="75px" *matHeaderCellDef> Rank </th>
+          <td mat-cell fxFlex="75px" *matCellDef="let coin"> {{coin.rank}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="icon">
+            <th mat-header-cell fxFlex="75px" *matHeaderCellDef> Icon </th>
+            <td mat-cell fxFlex="75px" *matCellDef="let coin">icon</td>
       </ng-container>
 
       <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let coin"> {{coin.name}} ({{coin.symbol}})</td>
+          <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Name </th>
+          <td mat-cell fxFlex="175px" *matCellDef="let coin"> {{coin.name}} ({{coin.symbol}})</td>
       </ng-container>>
 
       <ng-container matColumnDef="marketCap">
-          <th mat-header-cell *matHeaderCellDef> Market Cap </th>
-          <td mat-cell *matCellDef="let coin"> ${{coin.quotes['USD'].market_cap}} </td>
+          <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Market Cap </th>
+          <td mat-cell fxFlex="175px" *matCellDef="let coin"> ${{addCommasToNum(coin.quotes['USD'].market_cap)}} </td>
       </ng-container>>
 
       <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef> Price </th>
-          <td mat-cell *matCellDef="let coin"> ${{coin.quotes['USD'].price}} </td>
+          <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Price </th>
+          <td mat-cell fxFlex="175px" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].price) }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="volume">
-          <th mat-header-cell *matHeaderCellDef> Volume (24h) </th>
-          <td mat-cell *matCellDef="let coin"> ${{coin.quotes['USD'].volume_24h}} </td>
+          <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Volume (24h) </th>
+          <td mat-cell fxFlex="175px" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].volume_24h) }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="supply">
-          <th mat-header-cell *matHeaderCellDef> Circulating Supply </th>
-          <td mat-cell *matCellDef="let coin"> ${{coin.total_supply}} </td>
+          <th mat-header-cell fxFlex="150px" *matHeaderCellDef> Circulating Supply </th>
+          <td mat-cell fxFlex="150px" *matCellDef="let coin"> ${{coin.total_supply}} {{ coin.symbol }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="change">
-          <th mat-header-cell *matHeaderCellDef> Change (24h) </th>
-          <td mat-cell *matCellDef="let coin"> {{coin.quotes['USD'].percent_change_24h}} % </td>
+          <th mat-header-cell fxFlex="100px" *matHeaderCellDef> Change (24h) </th>
+          <td mat-cell fxFlex="100px" *matCellDef="let coin" [style.color]="getColor(coin.quotes['USD'].percent_change_24h)">
+               {{coin.quotes['USD'].percent_change_24h}} % </td>
       </ng-container>>
           
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-header-row line-height="60px" *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row line-height="30px" *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </table>
 </div>
+

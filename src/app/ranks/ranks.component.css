@@ -6,3 +6,7 @@ table {
 .mat-header-cell {
     flex: 0 0 13%;
 }
+
+.mat-header-row {
+    font-size: 24pt;
+}
