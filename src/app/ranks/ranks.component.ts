@@ -31,7 +31,12 @@ export class RanksComponent implements OnInit {
     private http: HttpClient,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
-  ) { }
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'BTC',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../node_modules/cryptocurrency-icons/dist/svg/color/btc.svg')
+    );
+   }
 
   ngOnInit() {
     this.getTopCoins();
@@ -41,7 +46,7 @@ export class RanksComponent implements OnInit {
     this.coinService.getTopCoins()
       .subscribe(data => {
         this.topCoins = data['data'];
-        // this.setIcon(this.topCoins);
+        this.setIcon(this.topCoins);
       });
   }
 
@@ -60,6 +65,18 @@ export class RanksComponent implements OnInit {
     return number.toFixed(6);
   }
 
+  // get icon of coin and add it as a property
+  setIcon(coins: Array<any>): any {
+    coins.filter(function(coin) {
+      const symbol = coin.symbol.toLowerCase();
+      coin.icon = `../../../node_modules/cryptocurrency-icons/dist/svg/color/${symbol}.svg`;
+      // this.matIconRegistry.addSvgIcon(
+      //   `${coin.symbol}`,
+      //   this.domSanitizer.bypassSecurityTrustResourceUrl(`${coin.icon}`)
+      // );
+    });
+  }
+
   addCommasToNum(number: string): any {
     let num = this.truncateNumber(+number);
     if (num > 999) {
@@ -70,6 +87,7 @@ export class RanksComponent implements OnInit {
       const commas = [];
       const newNum = [];
       for (let i = index; i > 0; i = i - 3) {
+        console.log('pushing commas');
         commas.push(i);
       }
       for (let j = 0; j < array.length; j++) {
@@ -82,21 +100,11 @@ export class RanksComponent implements OnInit {
         console.log('value of j: ' + j);
         newNum.push(array[j]);
       }
+      console.log(number.toLocaleString());
+      console.log('turned: ' + number + ' into ' + newNum.toString());
       return newNum.join();
     }
     return num.toString();
-  }
-
-  // get icon of coin and add is as a property
-  setIcon(coins: Array<any>): any {
-    coins.filter(function(coin) {
-      const symbol = coin.symbol.toLowerCase();
-      coin.icon = `../../../node_modules/cryptocurrency-icons/svg/color/${symbol}.svg`;
-      // this.matIconRegistry.addSvgIcon(
-      //   `${coin.symbol}`,
-      //   this.domSanitizer.bypassSecurityTrustResourceUrl(`${coin.icon}`)
-      // );
-    });
   }
 
 

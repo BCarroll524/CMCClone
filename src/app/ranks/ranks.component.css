@@ -19,9 +19,12 @@ table {
     border-bottom: none;
 }
 
-.mat-header-row {
-    font-size: 24pt;
+.mat-header-cell {
+    font-weight: bold;
+    font-size: 12pt;
+    color: black;
 }
+
 
 .positive-change {
     color: green;
@@ -32,5 +35,5 @@ table {
 }
 
 .neutral {
-    color: lightblue;
+    color: blue;
 }

@@ -9,6 +9,7 @@
             <th mat-header-cell fxFlex="75px" *matHeaderCellDef> Icon </th>
             <td mat-cell fxFlex="75px" *matCellDef="let coin">
                 <!-- <mat-icon svgIcon="{{coin.symbol}}"></mat-icon> -->
+                <a href="{{coin.icon}}"></a>
             </td>
       </ng-container>
 
@@ -19,28 +20,28 @@
 
       <ng-container matColumnDef="marketCap">
           <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Market Cap </th>
-          <td mat-cell fxFlex="175px" [ngClass]="'nuetral'" *matCellDef="let coin"> ${{addCommasToNum(coin.quotes['USD'].market_cap)}} </td>
+          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].market_cap) }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="price">
           <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Price </th>
-          <td mat-cell fxFlex="175px" [ngClass]="'nuetral'" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].price) }} </td>
+          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].price) }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="volume">
           <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Volume (24h) </th>
-          <td mat-cell fxFlex="175px" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].volume_24h) }} </td>
+          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].volume_24h) }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="supply">
           <th mat-header-cell fxFlex="150px" *matHeaderCellDef> Circulating Supply </th>
-          <td mat-cell fxFlex="150px" [ngClass]="'nuetral'" *matCellDef="let coin"> ${{coin.total_supply}} {{ coin.symbol }} </td>
+          <td mat-cell fxFlex="150px" *matCellDef="let coin"> ${{coin.total_supply}} {{ coin.symbol }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="change">
-          <th mat-header-cell fxFlex="100px" *matHeaderCellDef> Change (24h) </th>
-          <td mat-cell fxFlex="100px" *matCellDef="let coin" [ngClass]="{'positive-change':getColor(coin.quotes['USD'].percent_change_24h),
-            'negative-change':getColor(coin.quotes['USD'].percent_change_24h)}">
+          <th mat-header-cell fxFlex="125px" *matHeaderCellDef> Change (24h) </th>
+          <td mat-cell fxFlex="125px" *matCellDef="let coin" [ngClass]="{'positive-change':getColor(coin.quotes['USD'].percent_change_24h),
+            'negative-change':!getColor(coin.quotes['USD'].percent_change_24h)}">
                {{coin.quotes['USD'].percent_change_24h}} % </td>
       </ng-container>>
           
