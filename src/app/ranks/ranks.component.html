@@ -20,7 +20,7 @@
 
       <ng-container matColumnDef="marketCap">
           <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Market Cap </th>
-          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].market_cap) }} </td>
+          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].market_cap) | addCommas:'***' }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="price">
