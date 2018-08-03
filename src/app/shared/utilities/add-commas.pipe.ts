@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AddCommasPipe implements PipeTransform {
     transform(num, extension: string = ',') {
+        if (num === null) { return num; }
         const x = num.split('.');
         let x1 = x[0];
         const x2 = x.length > 1 ? '.' + x[1] : '';

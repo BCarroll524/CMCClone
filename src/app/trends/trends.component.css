@@ -5,11 +5,25 @@ table {
 
 .mat-cell,
 .mat-header-cell {
-    flex: 0 0 15%;
+    flex: 0 0 13%;
     border-bottom: none;
 }
 
-.mat-header-row {
-    font-size: 24pt;
+.mat-header-cell {
+    font-weight: bold;
+    font-size: 12pt;
+    color: black;
 }
 
+
+.positive-change {
+    color: green;
+}
+
+.negative-change {
+    color: red;
+}
+
+.neutral {
+    color: blue;
+}

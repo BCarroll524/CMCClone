@@ -64,10 +64,6 @@ export class RanksComponent implements OnInit {
     coins.filter(function(coin) {
       const symbol = coin.symbol.toLowerCase();
       coin.icon = `../../../node_modules/cryptocurrency-icons/dist/svg/color/${symbol}.svg`;
-      // this.matIconRegistry.addSvgIcon(
-      //   `${coin.symbol}`,
-      //   this.domSanitizer.bypassSecurityTrustResourceUrl(`${coin.icon}`)
-      // );
     });
   }
 
