@@ -8,7 +8,7 @@
       <ng-container matColumnDef="icon">
             <th mat-header-cell fxFlex="75px" *matHeaderCellDef> Icon </th>
             <td mat-cell fxFlex="75px" *matCellDef="let coin">
-                <mat-icon svgIcon="crypto:btc"></mat-icon>
+                <mat-icon svgIcon="crypto:{{ coin.symbol | lowercase }}"></mat-icon>
             </td>
       </ng-container>
 
@@ -19,17 +19,17 @@
 
       <ng-container matColumnDef="marketCap">
           <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Market Cap </th>
-          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].market_cap) | addCommas:'***' }} </td>
+          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ coin.quotes['USD'].market_cap | truncateNum | addCommas:',' }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="price">
           <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Price </th>
-          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].price) }} </td>
+          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ coin.quotes['USD'].price | truncateNum | addCommas:',' }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="volume">
           <th mat-header-cell fxFlex="175px" *matHeaderCellDef> Volume (24h) </th>
-          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ truncateNumber(coin.quotes['USD'].volume_24h) }} </td>
+          <td mat-cell fxFlex="175px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ coin.quotes['USD'].volume_24h | truncateNum | addCommas:',' }} </td>
       </ng-container>>
 
       <ng-container matColumnDef="supply">

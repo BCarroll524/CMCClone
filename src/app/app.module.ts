@@ -14,6 +14,7 @@ import { MaterialModule } from './material';
 
 // Custom Pipes
 import { AddCommasPipe } from './shared/utilities/add-commas.pipe';
+import { TruncateNumPipe } from './shared/utilities/truncate-num.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AddCommasPipe } from './shared/utilities/add-commas.pipe';
     CoinsComponent,
     RanksComponent,
     TrendsComponent,
-    AddCommasPipe
+    AddCommasPipe,
+    TruncateNumPipe,
   ],
   imports: [
     BrowserModule,

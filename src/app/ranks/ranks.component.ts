@@ -7,7 +7,6 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
-// icons
 
 @Component({
   selector: 'app-ranks',
@@ -35,7 +34,7 @@ export class RanksComponent implements OnInit {
   ) {
     this.matIconRegistry.addSvgIconSetInNamespace(
       'crypto',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/cryptocurrency-icons-black.svg')
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/cryptocurrency-icons-color.svg')
     );
    }
 
@@ -59,12 +58,6 @@ export class RanksComponent implements OnInit {
     return true;
   }
 
-  truncateNumber(number: number): any {
-    if (number > 1) {
-      return number.toFixed(2);
-    }
-    return number.toFixed(6);
-  }
 
   // get icon of coin and add it as a property
   setIcon(coins: Array<any>): any {
@@ -76,36 +69,6 @@ export class RanksComponent implements OnInit {
       //   this.domSanitizer.bypassSecurityTrustResourceUrl(`${coin.icon}`)
       // );
     });
-  }
-
-  addCommasToNum(number: string): any {
-    let num = this.truncateNumber(+number);
-    if (num > 999) {
-      console.log('in add commas if statement');
-      num = num.toString();
-      const index = num.indexOf('.');
-      const array = num.split();
-      const commas = [];
-      const newNum = [];
-      for (let i = index; i > 0; i = i - 3) {
-        console.log('pushing commas');
-        commas.push(i);
-      }
-      for (let j = 0; j < array.length; j++) {
-        console.log(j + ' compared to ' + commas[commas.length - 1]);
-        if ( j === commas[commas.length - 1] ) {
-          console.log('trying to add commas');
-          newNum.push(',');
-          commas.pop();
-        }
-        console.log('value of j: ' + j);
-        newNum.push(array[j]);
-      }
-      console.log(number.toLocaleString());
-      console.log('turned: ' + number + ' into ' + newNum.toString());
-      return newNum.join();
-    }
-    return num.toString();
   }
 
 
