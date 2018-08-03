@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { CoinService } from '../coin.service';
 import { DataSource } from '@angular/cdk/collections';
+
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -32,9 +33,9 @@ export class RanksComponent implements OnInit {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
-    this.matIconRegistry.addSvgIcon(
-      'BTC',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../node_modules/cryptocurrency-icons/dist/svg/color/btc.svg')
+    this.matIconRegistry.addSvgIconSetInNamespace(
+      'crypto',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/cryptocurrency-icons-black.svg')
     );
    }
 
