@@ -12,12 +12,16 @@ import { TrendsComponent } from './trends/trends.component';
 // material
 import { MaterialModule } from './material';
 
+// Custom Pipes
+import { AddCommasPipe } from './shared/utilities/add-commas.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
     CoinsComponent,
     RanksComponent,
-    TrendsComponent
+    TrendsComponent,
+    AddCommasPipe
   ],
   imports: [
     BrowserModule,
