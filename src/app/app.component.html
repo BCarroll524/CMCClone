@@ -1,2 +1,6 @@
-<h1 [ngClass]="'title'"> {{title}} </h1>
-<app-coins></app-coins>
+<div>
+    <a routerLink="/dashboard">
+        <h1 [ngClass]="'title'"> {{title}} </h1>
+    </a>
+    <router-outlet></router-outlet> 
+</div>

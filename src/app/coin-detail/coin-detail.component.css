@@ -1,0 +1,40 @@
+p {
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.symbol {
+    font-size: 12pt;
+    color: lightgrey;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.primary-title {
+    font-weight: bold;
+}
+
+.secondary-title {
+    font-size: 18px;
+}
+
+.positive-change {
+    color: green;
+}
+
+.negative-change {
+    color: red;
+}
+
+
+/*
+h2, h4 {
+    display: inline;
+}
+
+h4 {
+    color: lightgrey;
+} */

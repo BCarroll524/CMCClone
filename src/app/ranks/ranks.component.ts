@@ -6,6 +6,7 @@ import { DataSource } from '@angular/cdk/collections';
 
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,12 +26,14 @@ export class RanksComponent implements OnInit {
     'supply',
     'change'
   ];
+  highlightedRows = [];
 
   constructor(
     private coinService: CoinService,
     private http: HttpClient,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private route: Router
   ) {
     this.matIconRegistry.addSvgIconSetInNamespace(
       'crypto',
@@ -65,6 +68,11 @@ export class RanksComponent implements OnInit {
       const symbol = coin.symbol.toLowerCase();
       coin.icon = `../../../node_modules/cryptocurrency-icons/dist/svg/color/${symbol}.svg`;
     });
+  }
+
+  goToCoin(coin: any): any {
+    const id = coin.id;
+    this.route.navigate([`/coin/${id}`]);
   }
 
 
