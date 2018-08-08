@@ -9,8 +9,9 @@ import { CoinService } from '../coin.service';
   styleUrls: ['./coin-detail.component.css']
 })
 export class CoinDetailComponent implements OnInit {
-  coin: any;
-  coinSymbol: any;
+  coinId = String(this.route.snapshot.paramMap.get('id'));
+  coin$: any;
+  coinSymbol$: any;
   dataSource = [];
   displayedColumns = [
     'marketCap',
@@ -25,19 +26,25 @@ export class CoinDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getCoin();
-  }
-
-  getCoin(): void {
-    const id = String(this.route.snapshot.paramMap.get('id'));
-    this.coinService.getCoin(id)
-      .subscribe(data => {
-        this.coin = data['data'];
-        this.dataSource.push(this.coin);
-        console.log(this.coin);
-        this.getCoinSymbolId(this.coin.symbol);
+    this.coinService
+      .getCoin(this.coinId)
+      .subscribe((data) => {
+        this.coin$ = data['data'];
+        this.dataSource.push(this.coin$);
+        this.getCoinSymbolId(this.coin$.symbol);
       });
   }
+
+  // getCoin(): void {
+  //   const id = String(this.route.snapshot.paramMap.get('id'));
+  //   this.coinService.getCoin(id)
+  //     .subscribe(data => {
+  //       this.coin = data['data'];
+  //       this.dataSource.push(this.coin);
+  //       console.log(this.coin);
+  //       this.getCoinSymbolId(this.coin.symbol);
+  //     });
+  // }
 
   getColor(number: string): any {
     const actualNum = +number;
@@ -50,8 +57,8 @@ export class CoinDetailComponent implements OnInit {
   getCoinSymbolId(id: String): void {
     this.coinService.getCoinSymbolId(id)
       .subscribe(data => {
-        this.coinSymbol = data[0];
-        console.log(this.coinSymbol);
+        this.coinSymbol$ = data[0];
+        console.log(this.coinSymbol$);
       });
   }
 

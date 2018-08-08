@@ -42,7 +42,7 @@ export class CoinService {
   }
 
   getCoin(id: String): Observable<any> {
-    const endpoint = this.endpoints[2] + id;
+    const endpoint = this.endpoints[2] + id + '/';
     return this.http.get(endpoint);
   }
 
