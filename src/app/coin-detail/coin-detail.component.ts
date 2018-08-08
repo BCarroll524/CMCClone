@@ -10,6 +10,7 @@ import { CoinService } from '../coin.service';
 })
 export class CoinDetailComponent implements OnInit {
   coin: any;
+  coinSymbol: any;
   dataSource = [];
   displayedColumns = [
     'marketCap',
@@ -34,7 +35,7 @@ export class CoinDetailComponent implements OnInit {
         this.coin = data['data'];
         this.dataSource.push(this.coin);
         console.log(this.coin);
-        console.log(this.coinService.getCoinSymbolId(this.coin.symbol));
+        this.getCoinSymbolId(this.coin.symbol);
       });
   }
 
@@ -46,8 +47,12 @@ export class CoinDetailComponent implements OnInit {
     return true;
   }
 
-  getCoinSymbol(): void {
-
+  getCoinSymbolId(id: String): void {
+    this.coinService.getCoinSymbolId(id)
+      .subscribe(data => {
+        this.coinSymbol = data[0];
+        console.log(this.coinSymbol);
+      });
   }
 
 

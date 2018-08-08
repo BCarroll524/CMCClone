@@ -33,6 +33,10 @@ p {
     text-align: center;
 }
 
+.mat-header-row {
+    background-color: lightgrey;
+}
+
 
 .primary-title {
     font-weight: bold;

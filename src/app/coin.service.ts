@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -11,23 +11,33 @@ export class CoinService {
     'https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank&structure=array',
     'https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=percent_change_24h&structure=array',
     'https://api.coinmarketcap.com/v2/ticker/',
-    `https://rest.coinapi.io/v1/symbols?filter_symbol_id=$(symbol)_USD`,
+    'https://rest.coinapi.io/v1/symbols?filter_symbol_id=',
     `https://rest.coinapi.io/v1/quotes/$(symbol_id)/history?time_start=$(start_time)&time_end=$(end_time)`
   ];
   coinapi_token = 'B5430588-62D8-4098-90D8-74F582BDF634';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'X-CoinAPI-Key': 'B5430588-62D8-4098-90D8-74F582BDF634'
+    })
+  };
+
 
   // needed to allow CORS for 3rd endpoint to work while testing
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
 
   // GET top 10 coins
-  getTopCoins() {
+  getTopCoins(): Observable<any> {
     return this.http.get(this.endpoints[0]);
   }
 
   // GET top 10 trending coins
-  getTrendingCoins() {
+  getTrendingCoins(): Observable<any> {
     return this.http.get(this.endpoints[1]);
   }
 
@@ -36,8 +46,10 @@ export class CoinService {
     return this.http.get(endpoint);
   }
 
-  getCoinSymbolId(symbol: String) {
-    return this.http.get(this.endpoints[3]);
+  getCoinSymbolId(symbol: String): Observable<any> {
+    const endpoint = this.endpoints[3] + symbol + '_USD';
+    console.log(endpoint);
+    return this.http.get(endpoint, this.httpOptions);
   }
 
 }
