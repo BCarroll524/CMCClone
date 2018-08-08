@@ -26,7 +26,6 @@ export class RanksComponent implements OnInit {
     'supply',
     'change'
   ];
-  highlightedRows = [];
 
   constructor(
     private coinService: CoinService,

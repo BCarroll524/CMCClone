@@ -10,6 +10,13 @@ import { CoinService } from '../coin.service';
 })
 export class CoinDetailComponent implements OnInit {
   coin: any;
+  dataSource = [];
+  displayedColumns = [
+    'marketCap',
+    'volume',
+    'supply',
+    'max',
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +32,9 @@ export class CoinDetailComponent implements OnInit {
     this.coinService.getCoin(id)
       .subscribe(data => {
         this.coin = data['data'];
+        this.dataSource.push(this.coin);
         console.log(this.coin);
+        console.log(this.coinService.getCoinSymbolId(this.coin.symbol));
       });
   }
 
@@ -36,5 +45,11 @@ export class CoinDetailComponent implements OnInit {
     }
     return true;
   }
+
+  getCoinSymbol(): void {
+
+  }
+
+
 
 }

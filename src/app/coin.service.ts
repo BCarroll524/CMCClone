@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -9,8 +10,11 @@ export class CoinService {
   endpoints = [
     'https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank&structure=array',
     'https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=percent_change_24h&structure=array',
-    'https://api.coinmarketcap.com/v2/ticker/'
+    'https://api.coinmarketcap.com/v2/ticker/',
+    `https://rest.coinapi.io/v1/symbols?filter_symbol_id=$(symbol)_USD`,
+    `https://rest.coinapi.io/v1/quotes/$(symbol_id)/history?time_start=$(start_time)&time_end=$(end_time)`
   ];
+  coinapi_token = 'B5430588-62D8-4098-90D8-74F582BDF634';
 
   // needed to allow CORS for 3rd endpoint to work while testing
 
@@ -27,9 +31,13 @@ export class CoinService {
     return this.http.get(this.endpoints[1]);
   }
 
-  getCoin(id: String) {
+  getCoin(id: String): Observable<any> {
     const endpoint = this.endpoints[2] + id;
     return this.http.get(endpoint);
+  }
+
+  getCoinSymbolId(symbol: String) {
+    return this.http.get(this.endpoints[3]);
   }
 
 }

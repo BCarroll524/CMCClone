@@ -3,15 +3,36 @@ p {
     font-weight: bold;
 }
 
-.symbol {
+.secondary {
     font-size: 12pt;
     color: lightgrey;
 }
 
-.card-container {
+.card-container-header {
     display: flex;
     justify-content: space-between;
 }
+
+.card-container-content {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mat-header-cell {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.mat-cell {
+    font-size: 14px
+}
+
+.mat-cell,
+.mat-header-cell {
+    border-bottom: none;
+    text-align: center;
+}
+
 
 .primary-title {
     font-weight: bold;
