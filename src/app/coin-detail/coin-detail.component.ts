@@ -18,14 +18,22 @@ export class CoinDetailComponent implements OnInit {
     'supply',
     'max',
   ];
+  date: Date;
 
   constructor(
     private route: ActivatedRoute,
-    private coinService: CoinService,
+    private coinService: CoinService
   ) { }
 
   ngOnInit() {
     this.getCoin();
+    // testing out getting dates for historical data call
+    this.date = new Date();
+    const d = new Date();
+    const e = d.setDate(d.getDate() - 7);
+    console.log(this.date.toISOString.toString);
+    console.log(e);
+
   }
 
   getCoin(): void {
@@ -55,6 +63,8 @@ export class CoinDetailComponent implements OnInit {
       });
   }
 
-
+  getHistoricalPrice(): void {
+    return null;
+  }
 
 }

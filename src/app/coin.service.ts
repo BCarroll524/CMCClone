@@ -12,7 +12,7 @@ export class CoinService {
     'https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=percent_change_24h&structure=array',
     'https://api.coinmarketcap.com/v2/ticker/',
     'https://rest.coinapi.io/v1/symbols?filter_symbol_id=',
-    `https://rest.coinapi.io/v1/quotes/$(symbol_id)/history?time_start=$(start_time)&time_end=$(end_time)`
+    'https://rest.coinapi.io/v1/quotes/'
   ];
   coinapi_token = 'B5430588-62D8-4098-90D8-74F582BDF634';
   httpOptions = {
@@ -51,5 +51,11 @@ export class CoinService {
     console.log(endpoint);
     return this.http.get(endpoint, this.httpOptions);
   }
+
+  getHistoricalPrice(symbol: string, start: string, end: string): Observable<any> {
+    const endpoint = this.endpoints[4] + '/history?time_start=' + start + '&time_end=' + end;
+    return this.http.get(endpoint, this.httpOptions);
+  }
+
 
 }
