@@ -42,18 +42,18 @@ export class CoinService {
   }
 
   getCoin(id: String): Observable<any> {
-    const endpoint = this.endpoints[2] + id;
+    const endpoint = this.endpoints[2] + id + '/';
     return this.http.get(endpoint);
   }
 
   getCoinSymbolId(symbol: String): Observable<any> {
-    const endpoint = this.endpoints[3] + symbol + '_USD';
+    const endpoint = this.endpoints[3] + symbol + '_USD/';
     console.log(endpoint);
     return this.http.get(endpoint, this.httpOptions);
   }
 
   getHistoricalPrice(symbol: string, start: string, end: string): Observable<any> {
-    const endpoint = this.endpoints[4] + '/history?time_start=' + start + '&time_end=' + end;
+    const endpoint = this.endpoints[4] + '/history?time_start=' + start + '&time_end=' + end + '/';
     return this.http.get(endpoint, this.httpOptions);
   }
 
