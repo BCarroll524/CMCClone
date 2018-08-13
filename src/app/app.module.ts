@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './/app-routing.module';
 import { MomentModule } from 'angular2-moment/moment.module';
+import { ChartModule } from 'angular2-chartjs';
 
 import { AppComponent } from './app.component';
 import { CoinsComponent } from './coins/coins.component';
@@ -36,7 +37,8 @@ import { TruncateNumPipe } from './shared/utilities/truncate-num.pipe';
     MaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
-    MomentModule
+    MomentModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

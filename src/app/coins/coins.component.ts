@@ -3,6 +3,8 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { RanksComponent } from '../ranks/ranks.component';
 import { TrendsComponent } from '../trends/trends.component';
 
+import { CoinService } from '../coin.service';
+
 
 
 @Component({
@@ -13,10 +15,21 @@ import { TrendsComponent } from '../trends/trends.component';
 
 export class CoinsComponent implements OnInit {
 
+  allCoins$: any;
 
-  constructor() { }
+  constructor(
+    private coinService: CoinService
+  ) { }
 
   ngOnInit() {
+    this.getAllCoins();
+  }
+
+  getAllCoins(): void {
+    this.coinService.getAllCoins()
+      .subscribe(data => {
+        this.allCoins$ = data['data'];
+      });
   }
 
 }

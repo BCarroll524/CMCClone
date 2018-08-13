@@ -16,22 +16,22 @@
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="marketCap">
           <th mat-header-cell fxFlex="185px" *matHeaderCellDef>Market Cap</th>
-          <td mat-cell fxFlex="185px" *matCellDef="let coin">${{ coin$?.quotes['USD'].market_cap | truncateNum | addCommas:',' }}</td>
+          <td mat-cell fxFlex="185px" *matCellDef="let coin">${{ coin.quotes['USD'].market_cap | truncateNum | addCommas:',' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="volume">
             <th mat-header-cell fxFlex="185px" *matHeaderCellDef> Volume (24h) </th>
-            <td mat-cell fxFlex="185px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ coin$?.quotes['USD'].volume_24h | truncateNum | addCommas:',' }} </td>
+            <td mat-cell fxFlex="185px" [ngClass]="'neutral'" *matCellDef="let coin"> ${{ coin.quotes['USD'].volume_24h | truncateNum | addCommas:',' }} </td>
         </ng-container>
 
         <ng-container matColumnDef="supply">
             <th mat-header-cell fxFlex="160px" *matHeaderCellDef> Circulating Supply </th>
-            <td mat-cell fxFlex="160px" *matCellDef="let coin"> {{coin$?.total_supply}} {{ coin$?.symbol }} </td>
+            <td mat-cell fxFlex="160px" *matCellDef="let coin"> {{coin.total_supply}} {{ coin.symbol }} </td>
         </ng-container>
 
         <ng-container matColumnDef="max">
             <th mat-header-cell fxFlex="160px" *matHeaderCellDef> Max Supply </th>
-            <td mat-cell fxFlex="160px" *matCellDef="let coin"> {{coin$?.max_supply}} {{ coin$?.symbol }} </td>
+            <td mat-cell fxFlex="160px" *matCellDef="let coin"> {{coin.max_supply}} {{ coin.symbol }} </td>
         </ng-container>
 
         <mat-header-row line-height="60px" *matHeaderRowDef="displayedColumns"></mat-header-row>
