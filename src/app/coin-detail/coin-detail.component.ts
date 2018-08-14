@@ -24,6 +24,21 @@ export class CoinDetailComponent implements OnInit {
   ];
   timeStamps = [];
 
+  type = 'line';
+  data = {
+    labels: [],
+    datasets: [
+      {
+        label: 'Price of Past Week',
+        data: []
+      }
+    ]
+  };
+  options = {
+    responsive: true,
+    maintainAspectRatio: false
+  };
+
   constructor(
     private route: ActivatedRoute,
     private coinService: CoinService,
@@ -82,6 +97,18 @@ export class CoinDetailComponent implements OnInit {
     for (const num of nums) {
       const date = moment().subtract(num, 'days').toISOString();
       this.timeStamps.push(date);
+    }
+  }
+
+  setChartData(): void {
+    // set data.labels[] and data.datasets.data[]
+    for (const time of this.timeStamps) {
+      const dateLabel = moment(time).utc().format('DD[.] MMM');
+      this.data.labels.push(dateLabel);
+    }
+    for (const coin of this.coinPrices$) {
+      const price = coin.ask_price;
+      this.data.datasets[0].data.push(price);
     }
   }
 
