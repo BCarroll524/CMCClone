@@ -49,7 +49,6 @@ export class CoinService {
 
   getCoinSymbolId(symbol: String): Observable<any> {
     const endpoint = this.endpoints[3] + symbol + '_USD&limit=1';
-    console.log(endpoint);
     return this.http.get(endpoint, this.httpOptions);
   }
 

@@ -54,7 +54,8 @@ export class CoinDetailComponent implements OnInit {
 
       console.log(this.coin$);
       });
-    this.getWeekTimeStamps();
+      this.getWeekTimeStamps();
+      this.setChartData();
   }
 
 
@@ -71,7 +72,7 @@ export class CoinDetailComponent implements OnInit {
       .subscribe(data => {
         this.coinSymbol$ = data[0].symbol_id;
         console.log(this.coinSymbol$);
-        this.getHistoricalPrice();
+        // this.getHistoricalPrice();
       });
   }
 
@@ -84,11 +85,14 @@ export class CoinDetailComponent implements OnInit {
       this.coinService.getHistoricalPrice(this.coinSymbol$, this.timeStamps[num])
         .subscribe(data => {
           console.log(data);
-          this.coinPrices$.push(data[0].ask_price);
+          // this.coinPrices$.push(data[0].ask_price);
           // console.log(this.coinPrices$);
+
+          // push time and price to coin prices
+          this.coinPrices$[moment(data[0].time_exchange).format('DD[.] MMM')] = data[0].ask_price;
         });
     }
-    return null;
+    // this.setChartData();
   }
 
   getWeekTimeStamps(): void {
@@ -98,18 +102,29 @@ export class CoinDetailComponent implements OnInit {
       const date = moment().subtract(num, 'days').toISOString();
       this.timeStamps.push(date);
     }
+    // // removes toISOString function that is inserted in
+    console.log(this.timeStamps);
+    console.log(this.timeStamps.shift());
   }
 
   setChartData(): void {
+    console.log('SETTING CHART DATA');
     // set data.labels[] and data.datasets.data[]
-    for (const time of this.timeStamps) {
-      const dateLabel = moment(time).utc().format('DD[.] MMM');
+    this.timeStamps.forEach((time) => {
+      const dateLabel = moment(time).format('DD[.] MMM');
       this.data.labels.push(dateLabel);
-    }
-    for (const coin of this.coinPrices$) {
-      const price = coin.ask_price;
+      const price = this.coinPrices$[dateLabel];
       this.data.datasets[0].data.push(price);
-    }
+    });
+    this.data.labels.reverse();
+    this.data.datasets[0].data.reverse();
+    // for (const coin of this.coinPrices$) {
+    //   console.log(coin.ask_price);
+    //   const price = coin.ask_price;
+    //   this.data.datasets[0].data.push(price);
+    // }
+    // console.log(this.data.datasets[0].data);
+    console.log(this.data.labels);
   }
 
 
