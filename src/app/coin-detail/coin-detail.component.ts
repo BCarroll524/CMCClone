@@ -39,6 +39,16 @@ export class CoinDetailComponent implements OnInit {
     maintainAspectRatio: false
   };
 
+  coinPricesTestData = {
+    '10. Aug': 359.33,
+    '11. Aug': 319.25,
+    '12. Aug': 322.35,
+    '13. Aug': 319,
+    '14. Aug': 270.13,
+    '15. Aug': 285.44,
+    '16. Aug': 282.83,
+  };
+
   constructor(
     private route: ActivatedRoute,
     private coinService: CoinService,
@@ -113,18 +123,13 @@ export class CoinDetailComponent implements OnInit {
     this.timeStamps.forEach((time) => {
       const dateLabel = moment(time).format('DD[.] MMM');
       this.data.labels.push(dateLabel);
-      const price = this.coinPrices$[dateLabel];
+      const price = this.coinPricesTestData[dateLabel];
       this.data.datasets[0].data.push(price);
     });
     this.data.labels.reverse();
     this.data.datasets[0].data.reverse();
-    // for (const coin of this.coinPrices$) {
-    //   console.log(coin.ask_price);
-    //   const price = coin.ask_price;
-    //   this.data.datasets[0].data.push(price);
-    // }
-    // console.log(this.data.datasets[0].data);
     console.log(this.data.labels);
+    console.log(this.data.datasets[0].data);
   }
 
 

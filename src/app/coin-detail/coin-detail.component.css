@@ -20,7 +20,11 @@ p {
 
 .chart-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+}
+
+.chart {
+    width: 700px;
 }
 
 .mat-header-cell {
