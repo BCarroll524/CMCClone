@@ -15,7 +15,8 @@ p {
 
 .card-container-content {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    flex-wrap: nowrap;
 }
 
 .chart-container {
