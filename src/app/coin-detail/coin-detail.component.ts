@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+
 import { CoinService } from '../coin.service';
 import { MomentModule } from 'angular2-moment/moment.module';
 import * as moment from 'moment';
@@ -52,7 +55,14 @@ export class CoinDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private coinService: CoinService,
-  ) { }
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+  ) {
+    this.matIconRegistry.addSvgIconSetInNamespace(
+      'crypto',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/cryptocurrency-icons-color.svg')
+    );
+  }
 
   ngOnInit() {
     this.coinService

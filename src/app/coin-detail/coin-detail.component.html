@@ -11,25 +11,27 @@
         </span>
     </mat-card-title>
   </div>
-  <div class="card-container-content">
+  
     <mat-card-content>
-      <!-- <div> -->
+      <div class="card-container-content">
         <mat-list>
           <mat-list-item>
-            <h3 matLine>Rank</h3>
+            <mat-icon matListIcon>equalizer</mat-icon>
+            <h3 [ngClass]="'rank'"matLine>Rank {{ coin$.rank }}</h3>
           </mat-list-item>
           <mat-list-item>
+            <mat-icon matListIcon>link</mat-icon>
             <h3 matLine>Website</h3>
           </mat-list-item>
           <mat-list-item>
+            <mat-icon matListIcon>child_care</mat-icon>
             <h3 matLine>Reddit</h3>
           </mat-list-item>
           <mat-list-item>
+            <mat-icon matListIcon>code</mat-icon>
             <h3 matLine>Github</h3>
           </mat-list-item>
         </mat-list>
-      <!-- </div> -->
-      <!-- <div> -->
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="marketCap">
               <th mat-header-cell fxFlex="185px" *matHeaderCellDef>Market Cap</th>
@@ -55,9 +57,8 @@
             <mat-row line-height="40px" *matRowDef="let row; columns: displayedColumns;"></mat-row>
           
           </table>
-      <!-- </div> -->
+      </div>
     </mat-card-content>
-  </div>
   <div class="chart-container">
     <div class="chart">
       <chart [type]="type" [data]="data" [options]="options"></chart>
