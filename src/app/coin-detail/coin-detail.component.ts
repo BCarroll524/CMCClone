@@ -5,6 +5,7 @@ import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { CoinService } from '../coin.service';
+import { DataService } from '../data.service';
 import { MomentModule } from 'angular2-moment/moment.module';
 import * as moment from 'moment';
 
@@ -52,9 +53,11 @@ export class CoinDetailComponent implements OnInit {
     '16. Aug': 282.83,
   };
 
+
   constructor(
     private route: ActivatedRoute,
     private coinService: CoinService,
+    private dataService: DataService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
   ) {
@@ -71,13 +74,13 @@ export class CoinDetailComponent implements OnInit {
         this.coin$ = data['data'];
         this.dataSource.push(this.coin$);
         this.getCoinSymbolId(this.coin$.symbol);
-
-      console.log(this.coin$);
       });
-      this.getWeekTimeStamps();
-      this.setChartData();
+    this.getWeekTimeStamps();
+    this.setChartData();
   }
 
+  // need to transition from calling a coin by their id to taking coin passed from the data service
+  // when search is implemented, then can have option to make call to coin since nothing will be passed through
 
   getColor(number: string): any {
     const actualNum = +number;
@@ -91,7 +94,6 @@ export class CoinDetailComponent implements OnInit {
     this.coinService.getCoinSymbolId(id)
       .subscribe(data => {
         this.coinSymbol$ = data[0].symbol_id;
-        console.log(this.coinSymbol$);
         // this.getHistoricalPrice();
       });
   }
@@ -104,7 +106,7 @@ export class CoinDetailComponent implements OnInit {
     for (const num of nums) {
       this.coinService.getHistoricalPrice(this.coinSymbol$, this.timeStamps[num])
         .subscribe(data => {
-          console.log(data);
+          // console.log(data);
           // this.coinPrices$.push(data[0].ask_price);
           // console.log(this.coinPrices$);
 
@@ -123,12 +125,12 @@ export class CoinDetailComponent implements OnInit {
       this.timeStamps.push(date);
     }
     // // removes toISOString function that is inserted in
-    console.log(this.timeStamps);
-    console.log(this.timeStamps.shift());
+    // console.log(this.timeStamps);
+    this.timeStamps.shift();
   }
 
   setChartData(): void {
-    console.log('SETTING CHART DATA');
+    // console.log('SETTING CHART DATA');
     // set data.labels[] and data.datasets.data[]
     this.timeStamps.forEach((time) => {
       const dateLabel = moment(time).format('DD[.] MMM');
@@ -138,8 +140,8 @@ export class CoinDetailComponent implements OnInit {
     });
     this.data.labels.reverse();
     this.data.datasets[0].data.reverse();
-    console.log(this.data.labels);
-    console.log(this.data.datasets[0].data);
+    // console.log(this.data.labels);
+    // console.log(this.data.datasets[0].data);
   }
 
 

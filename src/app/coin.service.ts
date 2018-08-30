@@ -13,7 +13,7 @@ export class CoinService {
     'https://api.coinmarketcap.com/v2/ticker/',
     'https://rest.coinapi.io/v1/symbols?filter_symbol_id=',
     'https://rest.coinapi.io/v1/quotes/',
-    'https://api.coinmarketcap.com/v2/listings'
+    'https://api.coinmarketcap.com/v2/listings/'
   ];
   coinapi_token = 'B5430588-62D8-4098-90D8-74F582BDF634';
   httpOptions = {

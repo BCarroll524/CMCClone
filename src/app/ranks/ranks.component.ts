@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { CoinService } from '../coin.service';
+import { DataService } from '../data.service';
 import { DataSource } from '@angular/cdk/collections';
 
 import { MatIconRegistry } from '@angular/material';
@@ -29,6 +30,7 @@ export class RanksComponent implements OnInit {
 
   constructor(
     private coinService: CoinService,
+    private dataService: DataService,
     private http: HttpClient,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
@@ -71,6 +73,9 @@ export class RanksComponent implements OnInit {
 
   goToCoin(coin: any): any {
     const id = coin.id;
+    this.dataService.coin = coin;
+    console.log('Data Service:');
+    console.log(this.dataService.coin);
     this.route.navigate([`/coin/${id}`]);
   }
 
