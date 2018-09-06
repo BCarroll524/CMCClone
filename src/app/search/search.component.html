@@ -1,0 +1,12 @@
+<form>
+  <mat-form-field>
+    <input matInput type="text" aria-label="Search" placeholder="Search"
+      [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-icon matListIcon>search</mat-icon>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of allCoins$ | aysnc" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>  
+</form>

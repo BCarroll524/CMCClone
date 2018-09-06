@@ -12,6 +12,7 @@ import { CoinsComponent } from './coins/coins.component';
 import { RanksComponent } from './ranks/ranks.component';
 import { TrendsComponent } from './trends/trends.component';
 import { CoinDetailComponent } from './coin-detail/coin-detail.component';
+import { SearchComponent } from './search/search.component';
 
 // material
 import { MaterialModule } from './material';
@@ -19,6 +20,7 @@ import { MaterialModule } from './material';
 // Custom Pipes
 import { AddCommasPipe } from './shared/utilities/add-commas.pipe';
 import { TruncateNumPipe } from './shared/utilities/truncate-num.pipe';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { TruncateNumPipe } from './shared/utilities/truncate-num.pipe';
     AddCommasPipe,
     TruncateNumPipe,
     CoinDetailComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
