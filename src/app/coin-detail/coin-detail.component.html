@@ -1,8 +1,8 @@
 <mat-card>
   <div class="card-container-header">
-    <div>
+    <div [ngClass]="'card-title'">
       <mat-icon svgIcon="crypto:{{ coin$?.symbol | lowercase }}"></mat-icon>
-      <mat-card-title class="primary-title">{{ coin$?.name }}
+      <mat-card-title [ngClass]="'primary-title'">{{ coin$?.name }}
         <span [ngClass]="'secondary'"> ({{ coin$?.symbol }})</span>
       </mat-card-title>
     </div>

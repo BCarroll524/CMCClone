@@ -47,6 +47,9 @@ p {
     background-color: lightgrey;
 }
 
+.card-title {
+    display: inline-block;
+}
 
 .primary-title {
     font-weight: bold;
