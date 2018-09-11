@@ -62,15 +62,5 @@ export class SearchComponent implements OnInit {
     this.route.navigate([`/coin/${id}`]);
   }
 
-  // goToCoin(coin: any): any {
-  //   const id = coin.id;
-  //   this.dataService.coin = coin;
-  //   console.log('Data Service:');
-  //   console.log(this.dataService.coin);
-  //   this.route.navigate([`/coin/${id}`]);
-  }
-
-
-
 
 }
