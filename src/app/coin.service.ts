@@ -61,11 +61,5 @@ export class CoinService {
     return this.http.get(this.endpoints[5]);
   }
 
-  searchCoins(term: string): Observable<any> {
-    if (!term.trim()) {
-      // if not search term, return empty hero array
-      return of([]);
-    }
-  }
 
 }

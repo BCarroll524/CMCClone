@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormControl } from '@angular/forms';
 
 import { CoinService } from '../coin.service';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -17,26 +17,60 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 export class SearchComponent implements OnInit {
 
   myControl = new FormControl();
-  allCoins$ = [];
-  searchedCoins$ = [];
-  private searchTerms = new Subject<string>();
-
+  options$: string[];
+  filteredOptions: Observable<string[]>;
+  allCoins$ = {};
 
   constructor(
-    private coinService: CoinService
+    private coinService: CoinService,
+    private route: Router
   ) { }
 
   // push a aserach term into the observable stream
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
 
   ngOnInit() {
+    this.getCoins();
+  }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log(filterValue);
+    return this.options$.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   getCoins(): void {
-
+    this.coinService.getAllCoins()
+      .subscribe(data => {
+        data['data'].map(coin => {
+          this.allCoins$[coin.name] = coin.id;
+        });
+        this.options$ = data['data'].map(coin => {
+          return coin.name;
+        });
+        this.filteredOptions = this.myControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+      });
   }
+
+  goToCoin(coin: string): any {
+    console.log(coin);
+    const id = this.allCoins$[coin];
+    console.log('id: ' + id);
+    this.route.navigate([`/coin/${id}`]);
+  }
+
+  // goToCoin(coin: any): any {
+  //   const id = coin.id;
+  //   this.dataService.coin = coin;
+  //   console.log('Data Service:');
+  //   console.log(this.dataService.coin);
+  //   this.route.navigate([`/coin/${id}`]);
+  }
+
+
+
 
 }

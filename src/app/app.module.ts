@@ -6,6 +6,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './/app-routing.module';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { ChartModule } from 'angular2-chartjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CoinsComponent } from './coins/coins.component';
@@ -41,7 +43,10 @@ import { TruncateNumPipe } from './shared/utilities/truncate-num.pipe';
     FlexLayoutModule,
     AppRoutingModule,
     MomentModule,
-    ChartModule
+    ChartModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
